@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kwabena Duako | Professional Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Professional portfolio website for job applications." />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background: #f5f5f7;
+    }
+    a { text-decoration: none; color: inherit; }
+    header {
+      background: linear-gradient(135deg, #4c6fff, #9b6bff);
+      color: #fff;
+      padding: 2.5rem 1.5rem 3.5rem;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .logo { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9; }
+    .nav-links a { margin-left: 1rem; font-size: 0.9rem; opacity: 0.9; }
+    .hero { display: grid; grid-template-columns: 2fr 1.2fr; gap: 2rem; align-items: center; }
+    .hero-main h1 { font-size: 2.3rem; margin-bottom: 0.5rem; }
+    .hero-main h2 { font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem; opacity: 0.95; }
+    .hero-main p { font-size: 0.95rem; max-width: 34rem; margin-bottom: 1.5rem; opacity: 0.95; }
+    .hero-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-primary, .btn-ghost {
+      padding: 0.7rem 1.3rem; border-radius: 999px; font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.7); cursor: pointer;
+      background: rgba(255, 255, 255, 0.1); color: #fff;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .btn-primary {
+      background: #fff; color: #1a1b2f; border-color: #fff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25); }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.18); transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); }
+    .hero-card {
+      background: rgba(255, 255, 255, 0.12); border-radius: 1rem; padding: 1.2rem 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); font-size: 0.85rem;
+    }
+    .hero-card h3 { font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .hero-card ul { list-style: none; }
+    .hero-card li + li { margin-top: 0.3rem; }
+    main { margin-top: -1.8rem; padding: 0 1.5rem 3rem; }
+    section {
+      background: #fff; border-radius: 1.1rem; padding: 1.8rem 1.5rem; margin: 0 auto 1.4rem;
+      max-width: 1000px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    }
+    section h2 { font-size: 1.2rem; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.4rem; }
+    section h2 span { font-size: 1.4rem; }
+    .about-text p { font-size: 0.95rem; margin-bottom: 0.7rem; }
+    .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 1rem; font-size: 0.9rem; }
+    .pill {
+      display: inline-block; padding: 0.3rem 0.7rem; border-radius: 999px;
+      background: #f3f4ff; font-size: 0.8rem; margin: 0.15rem;
+    }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; font-size: 0.9rem; }
+    .skills-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .experience-item + .experience-item { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee; }
+    .experience-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+    .experience-role { font-weight: 600; font-size: 0.95rem; }
+    .experience-meta { font-size: 0.8rem; color: #555; }
+    .experience-item ul { margin-left: 1rem; font-size: 0.9rem; }
+    .experience-item li + li { margin-top: 0.2rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; font-size: 0.9rem; }
+    .project-card {
+      border-radius: 0.9rem; border: 1px solid #ececf5; padding: 1rem; background: #fafafe;
+    }
+    .project-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .project-tag {
+      display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.08em; opacity: 0.7; margin-bottom: 0.5rem;
+    }
+    .contact-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 1.4rem; font-size: 0.9rem; }
+    .contact-grid form { display: grid; gap: 0.7rem; }
+    label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #555; }
+    input, textarea {
+      width: 100%; padding: 0.6rem 0.7rem; border-radius: 0.5rem; border: 1px solid #d9dce9;
+      font: inherit; outline: none; transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      background: #f9f9ff;
+    }
+    input:focus, textarea:focus {
+      border-color: #4c6fff; box-shadow: 0 0 0 1px rgba(76, 111, 255, 0.1); background: #fff;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .submit-btn {
+      margin-top: 0.5rem; padding: 0.7rem 1.4rem; border-radius: 999px; background: #4c6fff;
+      color: #fff; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500;
+      align-self: flex-start; transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: 0 8px 20px rgba(76, 111, 255, 0.3);
+    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(76, 111, 255, 0.35); background: #3c59e0; }
+    .contact-side p { margin-bottom: 0.5rem; }
+    .contact-list { list-style: none; margin-top: 0.6rem; }
+    .contact-list li + li { margin-top: 0.35rem; }
+    footer { text-align: center; font-size: 0.8rem; color: #777; padding: 0.8rem 1.5rem 1.5rem; }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      header { padding-bottom: 2.4rem; }
+      main { margin-top: -1.2rem; }
+      .top-nav { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / HERO -->
+  <header>
+    <div class="container">
+      <div class="top-nav">
+        <div class="logo">KD</div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <div class="hero">
+        <div class="hero-main">
+          <h1>Kwabena Duako</h1>
+          <h2>Customer Service & IT-Savvy Professional</h2>
+          <p>
+            Detail-oriented, people-focused, and tech-comfortable professional with experience in customer service,
+            problem solving, and fast-paced environments. Actively seeking opportunities where I can support customers,
+            learn quickly, and grow with the team.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn-primary">Contact Me</a>
+            <a href="resume.pdf" class="btn-ghost">View Résumé ↗</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Quick Facts</h3>
+          <ul>
+            <li>📍 Location: Atlanta, GA (open to nearby areas / remote)</li>
+            <li>🎓 College student with strong interest in IT & customer experience</li>
+            <li>💬 Excellent communication & problem-solving skills</li>
+            <li>⚙️ Comfortable with computers, software, and learning new systems</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h2><span>👋</span> About Me</h2>
+        <div class="about-text">
+          <p>
+            I am a motivated and reliable professional with a strong background in customer service and a growing
+            foundation in technology. I enjoy helping people, solving problems, and making sure tasks are organized and completed on time.
+          </p>
+          <p>
+            I’m currently looking for roles where I can bring my communication skills, attention to detail,
+            and willingness to learn — whether that’s in customer service, administrative support, or entry-level IT / office roles.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div>
+            <strong>What I’m Good At</strong>
+            <p>Staying calm under pressure, explaining things clearly, and following through on tasks.</p>
+          </div>
+          <div>
+            <strong>What I’m Looking For</strong>
+            <p>A supportive, professional environment where I can grow, contribute, and build my career long-term.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <h2><span>🧰</span> Skills</h2>
+        <div class="skills-grid">
+          <div class="skills-card">
+            <h3>Customer & People Skills</h3>
+            <span class="pill">Active listening</span>
+            <span class="pill">Conflict resolution</span>
+            <span class="pill">Phone & in-person support</span>
+            <span class="pill">Friendly & professional tone</span>
+          </div>
+          <div class="skills-card">
+            <h3>Technical & Computer Skills</h3>
+            <span class="pill">Microsoft Word / Excel</span>
+            <span class="pill">Email & calendars</span>
+            <span class="pill">Basic troubleshooting</span>
+            <span class="pill">Comfortable learning new software</span>
+          </div>
+          <div class="skills-card">
+            <h3>Work Habits</h3>
+            <span class="pill">Reliable & punctual</span>
+            <span class="pill">Fast learner</span>
+            <span class="pill">Organized</span>
+            <span class="pill">Team player</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <h2><span>💼</span> Experience</h2>
+
+        <!-- Job 1 -->
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-role">Customer Service / Cashier</div>
+            <div class="experience-meta">Company Name • City, State • 20XX – Present</div>
+          </div>
+          <ul>
+            <li>Greeted customers, processed purchases, and handled payments accurately.</li>
+            <li>Helped resolve customer questions and concerns in a polite, professional way.</li>
+            <li>Kept the work area clean, organized, and stocked throughout each shift.</li>
+          </ul>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-role">Student / Volunteer</div>
+            <div class="experience-meta">Organization / School • 20XX – 20XX</div>
+          </div>
+          <ul>
+            <li>Assisted with organizing events, communicating with students, or helping staff as needed.</li>
+            <li>Developed time management skills while balancing school, work, and responsibilities.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2><span>⭐</span> Highlights & Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-tag">Customer Service</div>
+            <h3>Improved Customer Experience</h3>
+            <p>
+              Took initiative to explain store policies clearly and calmly, which helped reduce repeated questions and
+              improved customer satisfaction during busy hours.
+            </p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-tag">Organization</div>
+            <h3>Organized Workflows</h3>
+            <p>
+              Helped keep schedules, tasks, or inventory more organized, making it easier for coworkers and supervisors
+              to find what they needed quickly.
+            </p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-tag">Learning & Growth</div>
+            <h3>Continuing Education</h3>
+            <p>
+              Actively building skills in technology and communication through college coursework, online learning, and
+              hands-on experience.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2><span>📩</span> Contact</h2>
+        <div class="contact-grid">
+          <form>
+            <div>
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="your@email.com" />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="button" class="submit-btn">
+              Send Message (Sample)
+            </button>
+          </form>
+
+          <div class="contact-side">
+            <p>
+              If you’d like to schedule an interview, ask questions, or learn more about my experience,
+              feel free to reach out.
+            </p>
+            <ul class="contact-list">
+              <li><strong>Email:</strong> <a href="mailto:youremail@example.com">youremail@example.com</a></li>
+              <li><strong>Phone:</strong> (555) 123-4567</li>
+              <li><strong>Location:</strong> Atlanta, GA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Kwabena Duako · Open to new opportunities
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
